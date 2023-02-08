@@ -1,0 +1,22 @@
+"#",Project,Activity,Target: MVP (sec),Time (sec),Target (R/G/A),Previous,Notes
+1,ISS,Total (Data Load + end to end),14,11.77,0.84x,11.45,"test
+• 2.79% degradation since previous report.
+• Best results on 9/26 — 11.1s."
+2,ISS,"Data Loads (200M rows, 2B cells)",10,5.797,0.58x,4.911,"• 18.04% degradation since previous report. 
+• Best results on 1/16 — 4.911s."
+3,ISS,End to end Calc,4,5.977,1.49x,6.539,"• 8.59% improvement since previous report. 
+• Best results on 11/05 — 4.91s."
+4,ISS,Change sector (Consumer Discretionary 1 to -1 inflation sensitivity),2,1.472,0.74x,1.769,"• 16.79% improvement since previous report. 
+• Best results on 1/23 — 1.472s."
+5,ISS,Change inflation window from 3 to 5 years,0.4,0.101,0.25x,0.025,"• 304.00% degradation since previous report. 
+• Best results on 1/17 — 0.023s."
+6,SU LL,Total (Data Load + end to end),,145.818,,192.705,"• 24.33% improvement since previous report. 
+• Best results on 1/23 — 145.818s."
+7,SU L,Total (Data Load + end to end),,45.27,,63.154,"• 28.32% improvement since previous report. 
+• Best results on 1/23 — 45.27s."
+8,SU M,Total (Data Load + end to end),,6.724,,8.711,"• 22.81% improvement since previous report. 
+• Best results on 1/23 — 6.724s."
+9,SU S,Total (Data Load + end to end),,1.816,,1.588,"• 14.36% degradation since previous report. 
+• Best results on 1/16 — 1.588s."
+10,MDT,Total (Data Load + end to end),,200.11,,2.181,"• 9075.15% degradation since previous report. 
+• Best results on 1/16 — 2.181s."

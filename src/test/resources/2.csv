@@ -1,0 +1,5 @@
+"#",Project,Dataset,Version,Target: MVP,Total Time (sec),Calculation Only Time,Total Time (sec / 100M rows),Calculation Time (s / 100M rows),Previous Total
+1,Project_LL,"200M rows, 2B cells",03b0b502,<120 sec,11.774,5.977,5.887,2.9884999999999997,11.45
+2,Project_L,"80M rows, 800M cells",03b0b502,<30 sec,5.282,1.982,6.6025,2.4775,4.894
+3,Project_M,"9.5M rows, 95M cells",03b0b502,<10 sec,2.017,0.621,21.23157894736842,6.536842105263158,2.022
+4,Project_S,"600K rows, 6M cells",03b0b502,<400 ms,1.199,0.459,199.83333333333334,76.5,0.998
