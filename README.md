@@ -1,7 +1,7 @@
 ```
-╔═════════════╗
-║ PseudoTable ║
-╚═════════════╝
+╔═════════════════════════════════════════════════════════════════════════╗
+║                               PseudoTable                               ║
+╚═════════════════════════════════════════════════════════════════════════╝
 ```
 PseudoTable lib requires ```List<String> headers``` and ```List<List<String>> data``` to print a table
 ```java
