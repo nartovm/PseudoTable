@@ -1,4 +1,4 @@
-package com.nartov.maksim.TablePrinter;
+package dev.nartov.TablePrinter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,8 +17,12 @@ public class PseudoTable {
     private static final char BORDER_CROSS_LEFT = '\u255F';
     private static final char BORDER_CROSS_RIGHT = '\u2562';
     private static final char INNER_HORIZONTAL = '\u2500';
-    private static final String SYMBOL_CROSS = "\u253C";
-    private static final String INNER_VERTICAL = "\u2502";
+    private static final char SYMBOL_CROSS = '\u253C';
+    private static final char SYMBOL_CROSS_HEADER = '\u256A';
+    private static final char INNER_VERTICAL = '\u2502';
+
+    private static final char HEADER_CROSS_LEFT = '\u2560';
+    private static final char HEADER_CROSS_RIGHT = '\u2563';
 
     // ArrayList to store the headers and data of the table
     private List<String> headers;
@@ -35,13 +39,14 @@ public class PseudoTable {
 
     // Helper method to print the table header
     private String printTableHeaderLine() {
+        int size = headers != null ? headers.size() : data.get(0).size();
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER_TOP_LEFT);
-        for (int i = 0; i < headers.size(); i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < columnWidths[i] + 2; j++) {
                 sb.append(BORDER_HORIZONTAL);
             }
-            if (i < headers.size() - 1) {
+            if (i < size - 1) {
                 sb.append(BORDER_CROSS);
             }
         }
@@ -52,8 +57,8 @@ public class PseudoTable {
     private String printTableHeaderString() {
         StringBuilder sb = new StringBuilder();
         sb.append(printLineOfData(headers));
-        sb.append(printHorizontal());
-        sb.append("\n");
+        if (data != null) sb.append(printHorizontalHeader());
+        if (data != null) sb.append("\n");
         return sb.toString();
     }
 
@@ -121,13 +126,14 @@ public class PseudoTable {
 
     // Helper method to print the table footer
     private String printTableFooter() {
+        int size = headers != null ? headers.size() : data.get(0).size();
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER_BOTTOM_LEFT);
-        for (int i = 0; i < headers.size(); i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < columnWidths[i] + 2; j++) {
                 sb.append(BORDER_HORIZONTAL);
             }
-            if (i < headers.size() - 1) {
+            if (i < size - 1) {
                 sb.append(BORDER_CROSS_BOTTOM);
             }
         }
@@ -148,21 +154,41 @@ public class PseudoTable {
         return sb;
     }
 
-    public static int[] getColumnWidths(List<String> headers, List<List<String>> data) {
-        int[] maxLengths = new int[headers.size()];
-        for (int i = 0; i < headers.size(); i++) {
-            maxLengths[i] = headers.get(i).length();
+    private StringBuilder printHorizontalHeader() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(HEADER_CROSS_LEFT);
+        for (int i = 0; i < columnWidths.length; i++) {
+            for (int j = 0; j < columnWidths[i] + 2; j++) {
+                sb.append(BORDER_HORIZONTAL);
+            }
+            if (i < columnWidths.length - 1) sb.append(SYMBOL_CROSS_HEADER);
         }
-        for (List<String> row : data) {
-            for (int i = 0; i < row.size(); i++) {
-                int length = getCellLength(row.get(i));
-                if (length > maxLengths[i]) {
-                    maxLengths[i] = length;
+        sb.append(HEADER_CROSS_RIGHT);
+        return sb;
+    }
+
+    public static int[] getColumnWidths(List<String> headers, List<List<String>> data) {
+        int[] maxLengths = new int[]{};
+        if (headers != null) {
+            maxLengths = new int[headers.size()];
+            for (int i = 0; i < headers.size(); i++) {
+                maxLengths[i] = headers.get(i).length();
+            }
+        }
+        if (data != null) {
+            if (headers == null) maxLengths = new int[data.get(0).size()];
+            for (List<String> row : data) {
+                for (int i = 0; i < row.size(); i++) {
+                    int length = getCellLength(row.get(i));
+                    if (length > maxLengths[i]) {
+                        maxLengths[i] = length;
+                    }
                 }
             }
         }
         return maxLengths;
     }
+
 
     private static int getCellLength(String s) {
         int length = -1;
@@ -181,8 +207,8 @@ public class PseudoTable {
     public String printTable() {
         String result = "";
         result += printTableHeaderLine();
-        result += printTableHeaderString();
-        result += printTableData();
+        if (headers != null) result += printTableHeaderString();
+        if (data != null) result += printTableData();
         result += printTableFooter();
         return result;
     }
