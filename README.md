@@ -3,7 +3,7 @@
 ║ PseudoTable ║
 ╚═════════════╝
 ```
-PseudoTable lib requires headers and data to print a table
+PseudoTable lib requires ```List<String> headers``` and ```List<List<String>> data``` to print a table
 ```java
 List<String> headers = new ArrayList<>(List.of("Header", "And one more", "Third"));
 List<List<String>> data = new ArrayList<>() {{
